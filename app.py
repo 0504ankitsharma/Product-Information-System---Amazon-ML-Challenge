@@ -43,7 +43,7 @@ def main():
     processed_df, features, vectorizer, model, le = load_data()
 
     # Sidebar for choosing query type
-    query_type = st.sidebar.radio("Choose query type:", ["Group ID", "General Question"])
+    query_type = st.sidebar.radio("Choose query type:", ["Group ID"])
 
     if query_type == "Group ID":
         group_id = st.text_input("Enter the group ID:")
@@ -59,12 +59,6 @@ def main():
                 st.image(image_link, caption=f"Product Image (Group ID: {group_id})", use_column_width=True)
             except ValueError:
                 st.error("Please enter a valid integer for the group ID.")
-
-    else:  # General Question
-        user_question = st.text_input("Ask a question about product attributes:", "What is the height of the product?")
-        if st.button("Get Answer"):
-            answer = answer_question(user_question, model, vectorizer, le)
-            st.success(f"Answer: {answer}")
 
     # Display all unique attributes
     st.sidebar.subheader("Available Attributes")
